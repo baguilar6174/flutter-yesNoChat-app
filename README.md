@@ -31,6 +31,12 @@ git clone https://github.com/baguilar6174/flutter-yesNoChat-app.git
 
 ## Yes/No Chat applicacion
 
+<table>
+  <tr>
+    <td align="center" valign="center"><img src="./media/1.png" width="20%"></td>
+  </tr>
+</table>
+
 ## Autor
 
 - Website - [www.bryan-aguilar.com](https://www.bryan-aguilar.com/)
