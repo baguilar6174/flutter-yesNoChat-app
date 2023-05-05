@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:yesnochat_app/features/features.dart';
 
 class MessageBuble extends StatelessWidget {
-  const MessageBuble({super.key});
+  final Message message;
+
+  const MessageBuble({super.key, required this.message});
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +18,11 @@ class MessageBuble extends StatelessWidget {
             color: colors.primary,
             borderRadius: BorderRadius.circular(20),
           ),
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Text(
-              'Hello world',
-              style: TextStyle(color: Colors.white),
+              message.text,
+              style: const TextStyle(color: Colors.white),
             ),
           ),
         ),

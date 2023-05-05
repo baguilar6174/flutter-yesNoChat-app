@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:yesnochat_app/features/features.dart';
 
 class ChatView extends StatelessWidget {
@@ -6,6 +8,8 @@ class ChatView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final chatProvider = context.watch<ChatProvider>();
+
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -13,15 +17,20 @@ class ChatView extends StatelessWidget {
           children: [
             Expanded(
               child: ListView.builder(
-                itemCount: 10,
+                controller: chatProvider.chatScrollController,
+                itemCount: chatProvider.messages.length,
                 itemBuilder: (context, index) {
-                  return (index % 2 == 0)
-                      ? const BotMessageBuble()
-                      : const MessageBuble();
+                  final Message message = chatProvider.messages[index];
+                  return (message.fromWho == FromWho.bot)
+                      ? BotMessageBuble(message: message)
+                      : MessageBuble(message: message);
                 },
               ),
             ),
-            const FieldBox(),
+            FieldBox(
+              // ? onValue: (value) => chatProvider.sendMessage(value),
+              onValue: chatProvider.sendMessage,
+            ),
           ],
         ),
       ),

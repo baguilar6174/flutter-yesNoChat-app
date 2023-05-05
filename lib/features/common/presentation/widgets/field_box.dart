@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class FieldBox extends StatelessWidget {
-  const FieldBox({super.key});
+  final ValueChanged<String> onValue;
+
+  const FieldBox({super.key, required this.onValue});
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +32,14 @@ class FieldBox extends StatelessWidget {
           onPressed: () {
             final textValue = textController.value.text;
             textController.clear();
+            onValue(textValue);
           },
         ),
       ),
       onFieldSubmitted: (value) {
         textController.clear();
         focusNode.requestFocus();
+        onValue(value);
       },
     );
   }
