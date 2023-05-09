@@ -27,7 +27,7 @@ class BotMessageBuble extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 5),
-        const ImageMessage(),
+        ImageMessage(imageUrl: message.imageUrl!),
         const SizedBox(height: 5),
       ],
     );

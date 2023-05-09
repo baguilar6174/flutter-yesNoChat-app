@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:yesnochat_app/features/chat/domain/domain.dart';
+import 'package:yesnochat_app/features/chat/chat.dart';
 
 class ChatProvider extends ChangeNotifier {
   final ScrollController chatScrollController = ScrollController();
+  final GetAnswer getAnswer = GetAnswer();
 
   List<Message> messages = [
     Message(text: "Hello!", fromWho: FromWho.me),
@@ -12,6 +13,15 @@ class ChatProvider extends ChangeNotifier {
   Future<void> sendMessage(String text) async {
     if (text.isEmpty) return;
     final message = Message(text: text, fromWho: FromWho.me);
+    messages.add(message);
+    if (text.endsWith('?')) await bootReply();
+    // * Notify changes to UI
+    notifyListeners();
+    await moveScroll();
+  }
+
+  Future<void> bootReply() async {
+    final message = await getAnswer.getAnswer();
     messages.add(message);
     // * Notify changes to UI
     notifyListeners();

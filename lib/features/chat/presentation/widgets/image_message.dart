@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ImageMessage extends StatelessWidget {
-  const ImageMessage({super.key});
+  const ImageMessage({super.key, required this.imageUrl});
+
+  final String imageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +12,7 @@ class ImageMessage extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: Image.network(
-        'https://yesno.wtf/assets/no/23-5fe6c1ca6c78e7bf9a7cf43e406fb8db.gif',
+        imageUrl,
         width: size.width * 0.7,
         height: 150,
         fit: BoxFit.cover,
